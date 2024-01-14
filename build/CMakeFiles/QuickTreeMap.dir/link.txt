@@ -1,0 +1,3 @@
+C:\MyApps\cmake\bin\cmake.exe -E rm -f CMakeFiles\QuickTreeMap.dir/objects.a
+C:\MyApps\mingw64\bin\ar.exe qc CMakeFiles\QuickTreeMap.dir/objects.a @CMakeFiles\QuickTreeMap.dir\objects1.rsp
+C:\MyApps\mingw64\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\QuickTreeMap.dir/objects.a -Wl,--no-whole-archive -o QuickTreeMap.exe -Wl,--out-implib,libQuickTreeMap.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\QuickTreeMap.dir\linkLibs.rsp
