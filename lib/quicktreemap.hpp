@@ -2,7 +2,8 @@
 
 typedef unsigned char Byte;
 
-template <typename Value>
+// bit = 1, 2, 4, 8
+template <typename Value, Byte bit>
 class QuickTreeMap
 {
 public:
@@ -32,7 +33,7 @@ private:
         Value value;
         int height = 0;
         Node *parent = nullptr;
-        Node **childNodes = new Node *[16]
+        Node **childNodes = new Node *[1 << bit]
         { nullptr };
 
         ~Node();
@@ -56,11 +57,11 @@ private:
 
 private:
     Node *headNode;
-    int weight = 0;
+    int weight = 1;
 };
 
-template <typename Value>
-QuickTreeMap<Value>::QuickTreeMap()
+template <typename Value, Byte bit>
+QuickTreeMap<Value, bit>::QuickTreeMap()
 {
 
     headNode = new Node();
@@ -68,14 +69,14 @@ QuickTreeMap<Value>::QuickTreeMap()
     headNode->value = Value(0);
 }
 
-template <typename Value>
-QuickTreeMap<Value>::~QuickTreeMap()
+template <typename Value, Byte bit>
+QuickTreeMap<Value, bit>::~QuickTreeMap()
 {
     delete headNode;
 }
 
-template <typename Value>
-void QuickTreeMap<Value>::assign(Key key, Value value)
+template <typename Value, Byte bit>
+void QuickTreeMap<Value, bit>::assign(Key key, Value value)
 {
     Node *itr = headNode;
 
@@ -119,8 +120,8 @@ void QuickTreeMap<Value>::assign(Key key, Value value)
     }
 }
 
-template <typename Value>
-void QuickTreeMap<Value>::remove(Key key)
+template <typename Value, Byte bit>
+void QuickTreeMap<Value, bit>::remove(Key key)
 {
     Node *node;
 
@@ -129,12 +130,12 @@ void QuickTreeMap<Value>::remove(Key key)
     removeNode(node);
 }
 
-template <typename Value>
-void QuickTreeMap<Value>::removeNode(Node *node)
+template <typename Value, Byte bit>
+void QuickTreeMap<Value, bit>::removeNode(Node *node)
 {
     int maxHeight = -1;
     int maxHeightNode = -1;
-    for (int i = 0; i < 16; i++)
+    for (int i = 0; i < (1 << bit); i++)
     {
         if (node->childNodes[i] != nullptr)
         {
@@ -151,7 +152,7 @@ void QuickTreeMap<Value>::removeNode(Node *node)
         Node *leafNode = node;
         int childNum;
 
-        for (childNum = 0; childNum < 16; childNum++)
+        for (childNum = 0; childNum < (1 << bit); childNum++)
         {
             if (node == node->parent->childNodes[childNum])
             {
@@ -169,7 +170,7 @@ void QuickTreeMap<Value>::removeNode(Node *node)
         while (node != nullptr)
         {
             int h = -1;
-            for (int i = 0; i < 16; i++)
+            for (int i = 0; i < (1 << bit); i++)
             {
                 if (node->childNodes[i] != nullptr)
                 {
@@ -201,8 +202,8 @@ void QuickTreeMap<Value>::removeNode(Node *node)
     }
 }
 
-template <typename Value>
-Value &QuickTreeMap<Value>::get(Key key)
+template <typename Value, Byte bit>
+Value &QuickTreeMap<Value, bit>::get(Key key)
 {
     Node *node;
 
@@ -211,8 +212,8 @@ Value &QuickTreeMap<Value>::get(Key key)
     return node->value;
 }
 
-template <typename Value>
-typename QuickTreeMap<Value>::Node *QuickTreeMap<Value>::getNode(Key key)
+template <typename Value, Byte bit>
+typename QuickTreeMap<Value, bit>::Node *QuickTreeMap<Value, bit>::getNode(Key key)
 {
     Node *itr = headNode;
 
@@ -237,8 +238,8 @@ typename QuickTreeMap<Value>::Node *QuickTreeMap<Value>::getNode(Key key)
     throw "Key Not Found";
 }
 
-template <typename Value>
-QuickTreeMap<Value>::Key::Key(const Byte *content, Byte len)
+template <typename Value, Byte bit>
+QuickTreeMap<Value, bit>::Key::Key(const Byte *content, Byte len)
 {
     if (content == nullptr)
     {
@@ -249,43 +250,36 @@ QuickTreeMap<Value>::Key::Key(const Byte *content, Byte len)
     this->len = len;
 }
 
-template <typename Value>
-QuickTreeMap<Value>::Key::Key()
+template <typename Value, Byte bit>
+QuickTreeMap<Value, bit>::Key::Key()
 {
     this->content = nullptr;
     this->len = 0;
 }
 
-template <typename Value>
-Byte QuickTreeMap<Value>::Key::getBits()
+template <typename Value, Byte bit>
+Byte QuickTreeMap<Value, bit>::Key::getBits()
 {
     int ret;
+    Byte key;
 
-    if (count * 0.5 >= this->len)
+    if ((count / (8 / bit)) >= this->len)
     {
         ret = 0;
     }
     else
     {
-        if (count % 2 == 0)
-        {
-            ret = this->content[count / 2] % 16;
+        key = this->content[count / (8 / bit)];
+        ret = (key >> ((count % (8 / bit)) * bit)) % (0b10 << (bit - 1));
 
-            count++;
-        }
-        else
-        {
-            ret = this->content[count / 2] / 16;
-
-            count++;
-        }
+        count++;
     }
 
     return (ret);
 }
 
-template <typename Value>
-bool QuickTreeMap<Value>::Key::operator==(Key key) const
+template <typename Value, Byte bit>
+bool QuickTreeMap<Value, bit>::Key::operator==(Key key) const
 {
     for (Byte i = 0; i < this->len; i++)
     {
@@ -298,26 +292,26 @@ bool QuickTreeMap<Value>::Key::operator==(Key key) const
     return true;
 }
 
-template <typename Value>
-QuickTreeMap<Value>::Node::~Node()
+template <typename Value, Byte bit>
+QuickTreeMap<Value, bit>::Node::~Node()
 {
     delete[] childNodes;
 }
 
-template <typename Value>
-int QuickTreeMap<Value>::size()
+template <typename Value, Byte bit>
+int QuickTreeMap<Value, bit>::size()
 {
-    return weight;
+    return weight - 1;
 }
 
-template <typename Value>
-int QuickTreeMap<Value>::height()
+template <typename Value, Byte bit>
+int QuickTreeMap<Value, bit>::height()
 {
     return headNode->height;
 }
 
-template <typename Value>
-int QuickTreeMap<Value>::nodeHeight(Key key)
+template <typename Value, Byte bit>
+int QuickTreeMap<Value, bit>::nodeHeight(Key key)
 {
     return getNode(key)->height;
 }
