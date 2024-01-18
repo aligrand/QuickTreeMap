@@ -1,8 +1,0 @@
-[
-{
-  "directory": "E:/AliFolder/Coding/SCIENCE/QuickTreeMap/build",
-  "command": "C:\\MyApps\\mingw64\\bin\\g++.exe  @CMakeFiles/QuickTreeMap.dir/includes_CXX.rsp -g -o CMakeFiles\\QuickTreeMap.dir\\test.cpp.obj -c E:\\AliFolder\\Coding\\SCIENCE\\QuickTreeMap\\test.cpp",
-  "file": "E:/AliFolder/Coding/SCIENCE/QuickTreeMap/test.cpp",
-  "output": "CMakeFiles/QuickTreeMap.dir/test.cpp.obj"
-}
-]

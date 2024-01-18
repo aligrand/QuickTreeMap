@@ -1,3 +1,0 @@
-E:/AliFolder/Coding/SCIENCE/QuickTreeMap/build/CMakeFiles/QuickTreeMap.dir
-E:/AliFolder/Coding/SCIENCE/QuickTreeMap/build/CMakeFiles/edit_cache.dir
-E:/AliFolder/Coding/SCIENCE/QuickTreeMap/build/CMakeFiles/rebuild_cache.dir
