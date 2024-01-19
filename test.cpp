@@ -2,10 +2,12 @@
 #include <random>
 #include <chrono>
 
+#define REMOVE_BY_HEIGHT // undef (or comment) this macro if you use high bit process
+
 #include "quicktreemap.hpp"
 
 #define b 2
-#define s 1000000 // must be more than 20
+#define s 10000000 // must be more than 20
 
 int main(int argc, char const *argv[])
 {
@@ -23,7 +25,7 @@ int main(int argc, char const *argv[])
         // map.assign(QuickTreeMap<int, b>::Key((Byte *)numKeys[i], sizeof(int)), i);
         map.assign(QuickTreeMap<int, b>::Key((Byte *)&numKeys[i], sizeof(int)), i);
 
-        // std::cout << i  << ' ' << *numKeys[i] << ' ' << map.height() << '\n'; // for speed-up comment this line
+        // std::cout << i  << ' ' << numKeys[i] << ' ' << map.height() << '\n'; // for speed-up comment this line
 
         // std::cout << 'a' << i << '\n'; // for speed-up comment this line
     }

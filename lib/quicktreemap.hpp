@@ -135,6 +135,7 @@ void QuickTreeMap<Value, bit>::removeNode(Node *node)
 {
     int maxHeight = -1;
     int maxHeightNode = -1;
+    #ifdef REMOVE_BY_HEIGHT
     for (int i = 0; i < (1 << bit); i++)
     {
         if (node->childNodes[i] != nullptr)
@@ -146,6 +147,18 @@ void QuickTreeMap<Value, bit>::removeNode(Node *node)
             }
         }
     }
+    #else
+    for (int i = 0; i < (1 << bit); i++)
+    {
+        if (node->childNodes[i] != nullptr)
+        {
+            maxHeight = node->childNodes[i]->height;
+            maxHeightNode = i;
+
+            break;
+        }
+    }
+    #endif
 
     if (maxHeight == -1) // node in leaf
     {
