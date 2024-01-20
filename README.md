@@ -1,4 +1,4 @@
 # Lib
 Library is one header-only template file in `lib` folder
-# Algurithm
+# Algorithm
 You can read it in wiki
