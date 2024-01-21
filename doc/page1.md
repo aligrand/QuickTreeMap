@@ -16,7 +16,9 @@ For assigning we do:
    2. `child[i]` is not null
       1. keys are same => update value
       2. keys are not same => go to **fisrt-number-1**  
-   
+
+- order is $\theta (height)$ means $O(\frac{8 \times L}{m})$
+
 ## Assign Example
 <video width="600" height="400" controls>
   <source src="res/assign.mp4" type="video/mp4">
@@ -31,6 +33,7 @@ For removing we do:
 3. when reached to leaf node, we remote it
    
 - it depends on impeliment, but in orginal, we move to leaf throgh path with **more height**
+- order is $\theta (height)$ means $O(\frac{8 \times L}{m})$
 
 ## Remove Example
 <video width="600" height="400" controls>
