@@ -1,9 +1,7 @@
 # Welcome
-Welcome to the QuickTreeMap wiki!
+Welcome to the QuickTreeMap document!
 
-this is wiki page of QuickTreeMap algorithm.
-
-this wiki has 3 pages:
+this document has 2 pages:
 - page 1: Introduction of Algorithm
 - page 2: Implementation Tips   
   
