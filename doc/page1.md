@@ -20,10 +20,7 @@ For assigning we do:
 - order is $\theta (height)$ means $O(\frac{8 \times L}{m})$
 
 ## Assign Example
-<video width="600" height="400" controls>
-  <source src="res/assign.mp4" type="video/mp4">
-Your browser does not support the video tag.
-</video>
+https://github.com/aligrand/QuickTreeMap/assets/54209629/33c23db5-9546-432f-bfab-c0433659d1c8
   
 # Remove
 For removing we do:
@@ -36,13 +33,10 @@ For removing we do:
 - order is $\theta (height)$ means $O(\frac{8 \times L}{m})$
 
 ## Remove Example
-<video width="600" height="400" controls>
-  <source src="res/remove.mp4" type="video/mp4">
-Your browser does not support the video tag.
-</video>
+https://github.com/aligrand/QuickTreeMap/assets/54209629/e6d55ec7-65aa-40bd-bc41-da5faa58d4a5
 
 # Note
 images are in path [images](res/qtmGraphViz/)   
-
+videos are in path [videos](res)
 
 > [Countinue your tour : Impelimentation Tips](page2.md)
